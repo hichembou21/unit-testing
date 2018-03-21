@@ -31,6 +31,22 @@ describe('jasmine syntax', function () {
         it('should divise two numbers', function () {
             expect(t.operation(10, 5, '/')).toBe(2);  
         });
+
+        it('should return NaN when a or b', function () {
+            expect(t.operation('bloup', 5, '/')).toBeNaN();
+            expect(t.operation('bloup', 5, '+')).toBeNaN();  
+            expect(t.operation('bloup', 5, '-')).toBeNaN();  
+            expect(t.operation('bloup', 5, '*')).toBeNaN();  
+        });
+
+        it('should not crash when dividing by zero', function () {
+            expect(t.operation(10, 0, '/')).toBe(Infinity);  
+        });
+
+        it('should throw Error when wrong operator', function () {
+            expect(() => t.operation(0, 0, 'bloup')).toThrow(new Error('wrong operand given'));  
+        });
+
     });
 
     });
